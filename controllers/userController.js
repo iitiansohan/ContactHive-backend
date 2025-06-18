@@ -5,7 +5,7 @@ const User=require("../models/userModel");
 
 /*@description Register a user
   route POST /api/users/register
-  access private */
+  access public */
 
 const registerUser=asyncHandler(async (req,res)=>{
     const {username,email,password}=req.body;
@@ -41,7 +41,7 @@ const registerUser=asyncHandler(async (req,res)=>{
 
 /*@description login user
   route POST /api/users/login
-  access private */
+  access public */
 
 const loginUser=asyncHandler(async (req,res)=>{
     const {email,password}=req.body;
