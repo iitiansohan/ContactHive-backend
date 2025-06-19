@@ -9,13 +9,14 @@ const Contact=require("../models/contactModel");
   route GET /api/contacts
   access private */
 const getContacts=asyncHandler(async (req,res)=>{
-    const contacts=await Contact.find({user_id: req.user.id});
+    const contacts=await Contact.find({user_id: req.user.id});//user_id is passed ,so that contacts of that user only is shown
     res.status(200).json(contacts);
 });
 
 /*@description Create contacts
   route POST /api/contacts
   access private */
+// for creating a new contact the request body should have name,email and phone
 const createContact=asyncHandler(async (req,res)=>{
     console.log("The request body is " ,req.body);
     const {name,email,phone} =req.body;
@@ -56,7 +57,7 @@ const updateContact=asyncHandler(async (req,res)=>{
       res.status(404);
       throw new Error("Contact Not Found");
     }
-    if(contact.user_id.toString()!=req.user.id)
+    if(contact.user_id.toString()!=req.user.id)//toString() is done as contact.user_if is of type ObjectId
     {
       res.status(403);
       throw new Error("User do not have permission");
